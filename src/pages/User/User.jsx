@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./User.scss";
 
 import Account from "../../components/Account/Account";
 import Button from "../../components/Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "../../redux/reducers/profileSlice";
 
 function User () {
+    const dispatch = useDispatch();
+    const profileReducer = useSelector((state) => state.profile)
+
+    useEffect(() =>{
+        return () => {
+            dispatch(getProfile())
+        }
+    },[dispatch, getProfile])
+    console.log(profileReducer.data)
+
     return (
         <main className="main bg-dark">
-            <div className="header">
-                <h1>Welcome back Tony Jarvis!</h1>
+            {profileReducer && <div className="header">
+                <h1>Welcome back {profileReducer.data?.firstName} {profileReducer.data?.lastName} !</h1>
                 <Button />
-            </div>
+            </div>}
             <h2 className="sr-only">Accounts</h2>
             <Account
                 title="Argent Bank Checking (x8349)"

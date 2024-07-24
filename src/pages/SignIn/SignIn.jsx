@@ -6,20 +6,24 @@ import InputField from '../../components/InputField/InputField';
 import Button from '../../components/Button/Button';
 
 const SignIn = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isLoading, error } = useSelector((state) => state.user);
+    const { isLoading } = useSelector((state) => state.user);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(login({ username, password }))
+        dispatch(login({ email, password }))
             .unwrap()
             .then(() => {
                 navigate('/user'); // Navigate to user dashboard after successful login
             })
-            .catch((error) => console.error('Failed login:', error));
+            .catch((error) => {
+                console.error('Failed login:', error);
+                setError(error)
+            }) 
     };
 
     return (
@@ -28,12 +32,13 @@ const SignIn = () => {
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
                 <form onSubmit={handleSubmit}>
+                    {error && <p>votre identifaint ou email est incorrect</p> }
                     <InputField
-                        label="Username"
+                        label="Email"
                         type="text"
-                        id="username"
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
+                        id="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                     />
                     <InputField
                         label="Password"

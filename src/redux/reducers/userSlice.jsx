@@ -2,16 +2,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const login = createAsyncThunk(
     'user/login',
-    async ({ username, password }, { rejectWithValue }) => {
+    async ({ email, password }, { rejectWithValue }) => {
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify({ email, password })
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.message || 'Failed to login');
-            return data.token; // Retourne directement le token
+            console.log('data',data)
+            return data.body.token; // Retourne directement le token
         } catch (error) {
             return rejectWithValue(error.toString());
         }
@@ -26,7 +27,7 @@ const userSlice = createSlice({
         error: null
     },
     reducers: {
-        logOut: (state) => {
+        logout: (state) => {
             state.token = null;
         }
     },
@@ -46,5 +47,5 @@ const userSlice = createSlice({
     }
 });
 
-export const { logOut } = userSlice.actions;
+export const { logout } = userSlice.actions;
 export default userSlice.reducer;

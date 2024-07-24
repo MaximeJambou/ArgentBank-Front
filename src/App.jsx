@@ -13,7 +13,7 @@ import Footer from './components/Footer/Footer';
 function App() {
   return (
     <Provider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
+      <PersistGate loading={null} persistor={persistor}>
       <Router>
           <Header />
           <Routes>
@@ -23,7 +23,7 @@ function App() {
           </Routes>
           <Footer />
       </Router>
-    {/* </PersistGate> */}
+    </PersistGate>
     </Provider>
   )
 }
