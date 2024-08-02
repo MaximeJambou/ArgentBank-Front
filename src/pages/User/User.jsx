@@ -3,12 +3,14 @@ import "./User.scss";
 
 import Account from "../../components/Account/Account";
 import Button from "../../components/Button/Button";
+import UserNameButton from "../../components/UserNameButton/UserNameButton";
+
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../../redux/reducers/profileSlice";
+import { getProfile } from "../../redux/reducers/userSlice";
 
 function User () {
     const dispatch = useDispatch();
-    const profileReducer = useSelector((state) => state.profile)
+    const profileReducer = useSelector((state) => state.user)
 
     useEffect(() =>{
         return () => {
@@ -21,7 +23,7 @@ function User () {
         <main className="main bg-dark">
             {profileReducer && <div className="header">
                 <h1>Welcome back {profileReducer.data?.firstName} {profileReducer.data?.lastName} !</h1>
-                <Button />
+                <UserNameButton />
             </div>}
             <h2 className="sr-only">Accounts</h2>
             <Account
