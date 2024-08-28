@@ -13,9 +13,9 @@ function User () {
     const profileReducer = useSelector((state) => state.user)
 
     useEffect(() =>{
-        return () => {
+        // return () => {
             dispatch(getProfile())
-        }
+        // }
     },[dispatch, getProfile])
     console.log(profileReducer.data)
 

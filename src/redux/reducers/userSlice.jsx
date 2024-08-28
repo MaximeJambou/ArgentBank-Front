@@ -107,8 +107,9 @@ const userSlice = createSlice({
             state.error = null;
         })
         .addCase(updateUsername.fulfilled, (state, action) => {
+            console.log("action", action.payload)
             state.isLoading = false;
-            state.username = action.payload; // Met à jour le nom d'utilisateur
+            state.userName = action.payload; // Met à jour le nom d'utilisateur
         })
         .addCase(updateUsername.rejected, (state, action) => {
             state.isLoading = false;

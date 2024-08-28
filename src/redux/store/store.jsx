@@ -3,7 +3,6 @@ import userSlice from '../reducers/userSlice';
 import storage from 'redux-persist/lib/storage'; // Utilise le stockage local sous le capot
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
-import profileSlice from '../reducers/profileSlice';
 
 // Configuration de Redux Persist
 const rootPersistConfig = {
@@ -24,7 +23,6 @@ const userPersistConfig = {
 // Création du reducer persisté
 const rootReducer = combineReducers({
     user: persistReducer(userPersistConfig, userSlice),
-    profile : profileSlice
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

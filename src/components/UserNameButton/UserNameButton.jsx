@@ -47,7 +47,7 @@ const UserNameButton = () => {
                         value={data ? data.lastName : ''}
                         disabled={true}
                     />
-                    <Button className="edit-button" type="submit">Save</Button>
+                    <Button className="edit-button save-button" type="submit">Save</Button>
                     <Button className="edit-button" type="button" onClick={() => setIsEditing(false)}>Cancel</Button>
                 </form>
             ) : (
