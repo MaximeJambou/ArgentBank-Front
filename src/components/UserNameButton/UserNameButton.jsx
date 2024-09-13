@@ -9,14 +9,14 @@ import "./UserNameButton.scss";
 const UserNameButton = () => {
     const { data } = useSelector(state => state.user);
     const [isEditing, setIsEditing] = useState(false);
-    const [newUsername, setNewUsername] = useState(data ? data.userName : '');
+    const [fields, setFields] = useState(data);
     const dispatch = useDispatch();
     
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (newUsername) {
-            dispatch(updateUsername({ newUsername }));
+        if (fields.userName) {
+            dispatch(updateUsername(fields.userName));
             setIsEditing(false);
         }
     };
@@ -30,21 +30,24 @@ const UserNameButton = () => {
                         id="newUsername"
                         type="text"
                         
-                        value={newUsername}
-                        onChange={(e) => setNewUsername(e.target.value)}
+                        value={fields.userName}
+                        onChange={(e) => setFields({
+                            ...fields,
+                            userName: e.target.value
+                        })}
                     />
                     <InputField
                         label="First Name"
                         id="firstName"
                         type="text"
-                        value={data ? data.firstName : ''}
+                        value={fields.firstName}
                         disabled={true}
                     />
                     <InputField
                         label="Last Name"
                         id="lastName"
                         type="text"
-                        value={data ? data.lastName : ''}
+                        value={fields.lastName}
                         disabled={true}
                     />
                     <Button className="edit-button save-button" type="submit">Save</Button>

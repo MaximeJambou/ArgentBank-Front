@@ -8,8 +8,9 @@ import { logout } from "../../redux/reducers/userSlice";
 const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const profileReducer = useSelector((state) => state.profile);
+    // const profileReducer = useSelector((state) => state.profile);
     const userReducer = useSelector((state) => state.user);
+    // console.log('===>', userReducer.data.userName)
     const logoutHandler = () => {
         dispatch(logout());
         navigate("/");
@@ -25,7 +26,7 @@ const Header = () => {
                 <h1 className="sr-only">Argent Bank</h1>
             </Link>
             <div>
-                {userReducer.token && (
+                {userReducer.data && (
                     <Link className="main-nav-item" to="/sign-in">
                         <i className="fa fa-user-circle"></i>
                         {userReducer.data.userName}

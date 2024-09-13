@@ -54,7 +54,7 @@ export const getProfile = createAsyncThunk(
 // Action asynchrone pour la mise à jour du nom d'utilisateur
 export const updateUsername = createAsyncThunk(
     'user/updateUsername',
-    async ({ newUsername }, { rejectWithValue, getState }) => {
+    async (userName, { rejectWithValue, getState }) => {
         try {
             const token = getState().user.token;
             const response = await fetch("http://localhost:3001/api/v1/user/profile", {
@@ -63,7 +63,7 @@ export const updateUsername = createAsyncThunk(
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ userName: newUsername }) 
+                body: JSON.stringify({ userName }) 
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.message || 'Failed to update username');
@@ -109,7 +109,10 @@ const userSlice = createSlice({
         .addCase(updateUsername.fulfilled, (state, action) => {
             console.log("action", action.payload)
             state.isLoading = false;
-            state.userName = action.payload; // Met à jour le nom d'utilisateur
+            state.data = {
+                ...state.data,
+                ...action.payload
+            }; // Met à jour le nom d'utilisateur
         })
         .addCase(updateUsername.rejected, (state, action) => {
             state.isLoading = false;

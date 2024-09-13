@@ -21,8 +21,8 @@ function User () {
 
     return (
         <main className="main bg-dark">
-            {profileReducer && <div className="header">
-                <h1>Welcome back {profileReducer.data?.firstName} {profileReducer.data?.lastName} !</h1>
+            {profileReducer.data && <div className="header">
+                <h1>Welcome back {profileReducer.data.firstName} {profileReducer.data.lastName} !</h1>
                 <UserNameButton />
             </div>}
             <h2 className="sr-only">Accounts</h2>
