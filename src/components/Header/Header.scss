@@ -25,6 +25,7 @@
 }
 
 .main-nav-item {
+	font-weight: bold;
     text-decoration: none;
     margin-right: 0.5rem;
 }
@@ -41,4 +42,9 @@
 .main-nav-logo-image {
 	max-width: 100%;
 	width: 200px;
+}
+
+.main-nav-login{
+	display: flex;
+	align-items: center;
 }

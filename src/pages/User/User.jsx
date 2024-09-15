@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./User.scss";
 
 import Account from "../../components/Account/Account";
-import Button from "../../components/Button/Button";
 import UserNameButton from "../../components/UserNameButton/UserNameButton";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -13,11 +12,11 @@ function User () {
     const profileReducer = useSelector((state) => state.user)
 
     useEffect(() =>{
-        // return () => {
+
             dispatch(getProfile())
-        // }
+        
     },[dispatch, getProfile])
-    console.log(profileReducer.data)
+    // console.log(profileReducer.data)
 
     return (
         <main className="main bg-dark">
