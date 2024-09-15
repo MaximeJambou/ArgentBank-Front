@@ -9,14 +9,14 @@ import "./UserNameButton.scss";
 const UserNameButton = () => {
     const { data } = useSelector(state => state.user);
     const [isEditing, setIsEditing] = useState(false);
-    const [fields, setFields] = useState(data);
+    const [userName, setUserName] = useState(data.userName);
     const dispatch = useDispatch();
     
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (fields.userName) {
-            dispatch(updateUsername(fields.userName));
+        if (userName) {
+            dispatch(updateUsername(userName));
             setIsEditing(false);
         }
     };
@@ -30,25 +30,26 @@ const UserNameButton = () => {
                         id="newUsername"
                         type="text"
                         
-                        value={fields.userName}
-                        onChange={(e) => setFields({
-                            ...fields,
-                            userName: e.target.value
-                        })}
+                        value={userName}
+                        onChange={(e) => setUserName(
+                            e.target.value
+                        )}
                     />
                     <InputField
                         label="First Name"
                         id="firstName"
                         type="text"
-                        value={fields.firstName}
+                        value={data.firstName}
                         disabled={true}
+                        readOnly = {true}
                     />
                     <InputField
                         label="Last Name"
                         id="lastName"
                         type="text"
-                        value={fields.lastName}
+                        value={data.lastName}
                         disabled={true}
+                        readOnly = {true}
                     />
                     <Button className="edit-button save-button" type="submit">Save</Button>
                     <Button className="edit-button" type="button" onClick={() => setIsEditing(false)}>Cancel</Button>

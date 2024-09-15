@@ -1,7 +1,7 @@
 import React from 'react';
 import "./InputField.scss";
 
-const InputField = ({ label, type, id, value, onChange, checked }) => {
+const InputField = ({ label, type, id, value, onChange, checked, readOnly }) => {
 
     return (
         <div className="input-wrapper">
@@ -12,6 +12,7 @@ const InputField = ({ label, type, id, value, onChange, checked }) => {
                 value={value}
                 onChange={onChange}
                 checked={checked}
+                readOnly = {readOnly?readOnly:false}
             />
         </div>
     );
