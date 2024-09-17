@@ -11,7 +11,7 @@ export const login = createAsyncThunk(
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.message || 'Failed to login');
-            // console.log('data',data)
+
             return data.body.token; // Retourne directement le token
         } catch (error) {
             return rejectWithValue(error.toString());
@@ -43,7 +43,6 @@ export const getProfile = createAsyncThunk(
                 throw new Error('Network response was not ok: ' + response.statusText);
             }
             let data = await response.json(); 
-            // console.log("data", data)
             return data.body
         } catch (error) {
             return rejectWithValue(error.toString());
@@ -109,7 +108,6 @@ const userSlice = createSlice({
             state.error = null;
         })
         .addCase(updateUsername.fulfilled, (state, action) => {
-            console.log("action", action.payload)
             state.isLoading = false;
             state.data = {
                 ...state.data,

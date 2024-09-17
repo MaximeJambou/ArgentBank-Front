@@ -1,0 +1,122 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: 'Transaction API'
+basePath: '/api/v1'
+paths:
+  /account/{accountId}/transactions:
+    get:
+      summary: 'Get all account transactions'
+      description: "Obtenir toutes les transactions d'un compte."
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          type: string
+          description: 'ID du compte'
+      responses:
+        200:
+          description: 'Liste des transactions'
+          schema:
+            $ref: '#/definitions/TransactionDetails'
+        401:
+          description: 'Non autorisé'
+        404:
+          description: 'Compte non trouvé'
+
+  /accounts:
+    get:
+      summary: 'Get all user accounts'
+      description: "Récupérer tous les comptes de l'utilisateur."
+      responses:
+        200:
+          description: 'Liste des comptes utilisateur'
+          schema:
+            $ref: '#/definitions/AccountDetails'
+        401:
+          description: 'Non autorisé'
+        404:
+          description: 'Aucun compte trouvé'
+
+  /transaction/{transactionId}/category:
+    put:
+      summary: 'Modify the category of a transaction'
+      description: "Modifier la catégorie d'une transaction."
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: "ID de la transaction à modifier"
+        - name: category
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              category:
+                type: string
+                description: "Nouvelle catégorie de la transaction"
+      responses:
+        200:
+          description: 'Catégorie mise à jour'
+        400:
+          description: 'Requête invalide'
+        401:
+          description: 'Non autorisé'
+        404:
+          description: 'Transaction non trouvée'
+
+  /transaction/{transactionId}/note:
+    put:
+      summary: 'Modify the note of a transaction'
+      description: "Modifier la note associée à une transaction."
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: "ID de la transaction à modifier"
+        - name: note
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              note:
+                type: string
+                description: "Nouvelle note à associer à la transaction"
+      responses:
+        200:
+          description: 'Note mise à jour'
+        400:
+          description: 'Requête invalide'
+        401:
+          description: 'Non autorisé'
+        404:
+          description: 'Transaction non trouvée'
+
+definitions:
+  TransactionDetails:
+    type: object
+    properties:
+      id:
+        type: string
+      amount:
+        type: number
+      date:
+        type: string
+      description:
+        type: string
+
+  AccountDetails:
+    type: object
+    properties:
+      id:
+        type: string
+      accountType:
+        type: string
+      balance:
+        type: number
+      currency:
+        type: string

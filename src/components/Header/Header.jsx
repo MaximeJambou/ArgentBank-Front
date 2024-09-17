@@ -38,8 +38,8 @@ const Header = () => {
                 )}
                 {userReducer.token && (
                     <div className="main-nav-item" onClick={logoutHandler}>
-                        <i className="fa fa-user-circle"></i>
-                        Logout
+                        <i className="fa fa-sign-out"></i>
+                        Sign Out
                     </div>
                 )}
             </div>
